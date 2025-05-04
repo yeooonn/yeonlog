@@ -1,3 +1,4 @@
+import URL from '@/constants/Url';
 import Link from 'next/link';
 
 const Header = () => {
@@ -8,13 +9,13 @@ const Header = () => {
           <span className="font-bold">yeonlog</span>
         </Link>
         <nav className="ml-auto flex items-center gap-4">
-          <Link href="/" className="hover:text-primary font-medium">
+          <Link href={URL.HOME} className="hover:text-primary font-medium">
             홈
           </Link>
-          <Link href="/blog" className="hover:text-primary font-medium">
+          <Link href={URL.BLOG} className="hover:text-primary font-medium">
             블로그
           </Link>
-          <Link href="/about" className="hover:text-primary font-medium">
+          <Link href={URL.ABOUT.PROFILE} className="hover:text-primary font-medium">
             소개
           </Link>
         </nav>
