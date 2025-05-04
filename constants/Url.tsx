@@ -1,6 +1,8 @@
 const URL = {
   HOME: '/',
-  BLOG: '/blog',
+  BLOG: {
+    getBlogPost: (id: number) => `/blog/${id}`,
+  },
   ABOUT: {
     PROFILE: '/about',
     SKILLS: '/about/skills',
