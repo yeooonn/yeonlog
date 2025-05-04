@@ -10,6 +10,11 @@ const URL = {
     BLOG: '/about/blog',
     CONTACT: '/about/contact',
   },
+  DOCS: {
+    HOME: '/docs',
+    INTRO: '/docs/intro',
+    BASIC: '/docs/basic',
+  },
 } as const;
 
 export default URL;
