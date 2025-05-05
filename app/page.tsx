@@ -1,31 +1,55 @@
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import URL from '@/constants/Url';
+import { PostCard } from '@/components/features/blog/PostCard';
+import { mockPosts, mockTags } from '@/mock/home';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { TagSection } from './_components/TagSection';
+import { ProfileSection } from './_components/ProfileSection';
 import Link from 'next/link';
+import URL from '@/constants/Url';
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="space-y-8">
-        {/* 섹션 제목 */}
-        <h2 className="text-3xl font-bold tracking-tight">블로그 목록</h2>
+    <div className="container py-8">
+      <div className="grid grid-cols-[200px_1fr_220px] gap-6">
+        {/* 좌측 사이드바 */}
+        <aside>
+          <TagSection tags={mockTags} />
+        </aside>
 
-        {/* 블로그 카드 그리드 */}
-        <div className="grid gap-4">
-          {/* 블로그 카드 반복 */}
-          {[1, 2, 3].map((i) => (
-            <Link href={`${URL.BLOG.getBlogPost(i)}`} key={i}>
-              <Card>
-                <CardHeader>
-                  <CardTitle>블로그 제목 {i}</CardTitle>
-                  <CardDescription>
-                    이것은 블로그 포스트에 대한 간단한 설명입니다. 여러 줄의 텍스트가 있을 수
-                    있습니다.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            </Link>
-          ))}
+        <div className="space-y-8">
+          {/* 섹션 제목, 정렬 방식 선택 */}
+          <div className="flex items-center justify-between">
+            <h2 className="text-3xl font-bold tracking-tight">블로그 목록</h2>
+            <Select defaultValue="latest">
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="정렬 방식 선택" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="latest">최신순</SelectItem>
+                <SelectItem value="oldest">오래된순</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* 블로그 카드 그리드 */}
+          <div className="grid gap-4">
+            {mockPosts.map((post) => (
+              <Link href={URL.BLOG.getBlogPost(post.id)} key={post.id}>
+                <PostCard key={post.id} post={post} />
+              </Link>
+            ))}
+          </div>
         </div>
+
+        {/* 우측 사이드바 */}
+        <aside>
+          <ProfileSection />
+        </aside>
       </div>
     </div>
   );
