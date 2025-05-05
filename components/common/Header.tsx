@@ -12,7 +12,7 @@ const Header = () => {
           <Link href={URL.HOME} className="hover:text-primary font-medium">
             홈
           </Link>
-          <Link href={URL.BLOG.getBlogPost(1)} className="hover:text-primary font-medium">
+          <Link href={URL.BLOG.getBlogPost('1')} className="hover:text-primary font-medium">
             블로그
           </Link>
           <Link href={URL.ABOUT.PROFILE} className="hover:text-primary font-medium">
