@@ -11,7 +11,7 @@ export default function BlogPost() {
       {/* 블로그 헤더 */}
       <div className="space-y-4">
         <div className="space-y-1">
-          <Badge>프론트엔드</Badge>
+          <Badge className="bg-cyan-600">프론트엔드</Badge>
           <h1 className="text-4xl font-bold">Next.js와 Shadcn UI로 블로그 만들기</h1>
         </div>
 
