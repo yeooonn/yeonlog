@@ -4,7 +4,7 @@ import Link from 'next/link';
 const Header = () => {
   return (
     <header className="sticky top-0 z-50 border-b bg-white">
-      <div className="container flex h-14 items-center px-4">
+      <div className="container flex h-[var(--header-height)] items-center px-4">
         <Link href="/" className="text-xl font-semibold">
           <span className="font-bold">yeonlog</span>
         </Link>
