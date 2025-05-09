@@ -1,5 +1,4 @@
 import { PostCard } from '@/components/features/blog/PostCard';
-import { mockTags } from '@/mock/home';
 import {
   Select,
   SelectContent,
@@ -7,20 +6,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { TagSection } from './_components/TagSection';
 import { ProfileSection } from './_components/ProfileSection';
 import Link from 'next/link';
 import URL from '@/constants/Url';
-import { getPublishedPosts } from '@/lib/notion';
+import { getPublishedPosts, getTags } from '@/lib/notion';
+import TagSection from './_components/TagSection';
 
-export default async function Home() {
-  const posts = await getPublishedPosts();
+interface HomeProps {
+  searchParams: Promise<{ tag?: string }>;
+}
+
+export default async function Home({ searchParams }: HomeProps) {
+  const { tag } = await searchParams;
+  const selectedTag = tag || '전체';
+  const [posts, tags] = await Promise.all([getPublishedPosts(selectedTag), getTags()]);
+
   return (
     <div className="container py-8">
       <div className="grid grid-cols-[200px_1fr_220px] gap-6">
         {/* 좌측 사이드바 */}
         <aside>
-          <TagSection tags={mockTags} />
+          <TagSection tags={tags} selectedTag={selectedTag} />
         </aside>
 
         <div className="space-y-8">
