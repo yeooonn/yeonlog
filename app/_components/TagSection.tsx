@@ -1,9 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { NotionTag } from '@/types/notion';
+import { TagFilterItem } from '@/types/blog';
+
 import Link from 'next/link';
 
 interface TagSectionProps {
-  tags: NotionTag[];
+  tags: TagFilterItem[];
 }
 
 export function TagSection({ tags }: TagSectionProps) {
