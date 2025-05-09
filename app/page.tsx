@@ -1,5 +1,5 @@
 import { PostCard } from '@/components/features/blog/PostCard';
-import { mockPosts, mockTags } from '@/mock/home';
+import { mockTags } from '@/mock/home';
 import {
   Select,
   SelectContent,
@@ -11,8 +11,10 @@ import { TagSection } from './_components/TagSection';
 import { ProfileSection } from './_components/ProfileSection';
 import Link from 'next/link';
 import URL from '@/constants/Url';
+import { getPublishedPosts } from '@/lib/notion';
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getPublishedPosts();
   return (
     <div className="container py-8">
       <div className="grid grid-cols-[200px_1fr_220px] gap-6">
@@ -38,9 +40,9 @@ export default function Home() {
 
           {/* 블로그 카드 그리드 */}
           <div className="grid gap-4">
-            {mockPosts.map((post) => (
+            {posts.map((post) => (
               <Link href={URL.BLOG.getBlogPost(post.id)} key={post.id}>
-                <PostCard key={post.id} post={post} />
+                <PostCard post={post} />
               </Link>
             ))}
           </div>
