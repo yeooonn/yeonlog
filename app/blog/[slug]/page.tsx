@@ -11,6 +11,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
 import rehypeSanitize from 'rehype-sanitize';
 import rehypePrettyCode from 'rehype-pretty-code';
+import rehypeSlug from 'rehype-slug';
 
 function TableOfContentsLink({ item }: { item: TableOfContentsItem }) {
   return (
@@ -81,7 +82,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
               options={{
                 mdxOptions: {
                   remarkPlugins: [remarkGfm],
-                  rehypePlugins: [rehypeSanitize, rehypePrettyCode], // 코드 보안 설정 및 코드 블록 하이라이팅
+                  rehypePlugins: [rehypeSlug, rehypeSanitize, rehypePrettyCode], // 코드 보안 설정 및 코드 블록 하이라이팅
                 },
               }}
             />
