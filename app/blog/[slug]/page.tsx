@@ -8,6 +8,9 @@ import { mockTableOfContents, TableOfContentsItem } from '@/mock/blog';
 import { getPostBySlug } from '@/lib/notion';
 import { formatDate } from '@/lib/date';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import remarkGfm from 'remark-gfm';
+import rehypeSanitize from 'rehype-sanitize';
+import rehypePrettyCode from 'rehype-pretty-code';
 
 function TableOfContentsLink({ item }: { item: TableOfContentsItem }) {
   return (
@@ -73,7 +76,15 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
           {/* 블로그 본문 */}
           <div className="prose prose-slate dark:prose-invert max-w-none">
-            <MDXRemote source={markdown} />
+            <MDXRemote
+              source={markdown}
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [remarkGfm],
+                  rehypePlugins: [rehypeSanitize, rehypePrettyCode], // 코드 보안 설정 및 코드 블록 하이라이팅
+                },
+              }}
+            />
           </div>
 
           <Separator className="my-16" />
